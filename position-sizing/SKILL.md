@@ -13,12 +13,16 @@ description: |
 
 Position sizing is how you survive. The goal: risk a small, consistent percentage of capital per trade so that no single loss can cripple your account.
 
+## Prerequisites
+
+No dependencies required. Works with manually provided prices. Enhanced with Groww MCP (live price, ATR, portfolio) or yfinance (`pip install yfinance`).
+
 ## Data Needed
 
 1. **Account size**: Total trading capital (ask user if not known)
-2. **Current price**: `get_quotes_and_depth` from Groww
-3. **ATR(14)**: `get_historical_technical_indicators` from Groww
-4. **Existing positions**: `get_equity_portfolio_holdings` to check concentration
+2. **Current price**: `get_quotes_and_depth` from Groww, or user-provided
+3. **ATR(14)**: `get_historical_technical_indicators` from Groww, or calculate from candle data
+4. **Existing positions**: `get_equity_portfolio_holdings` to check concentration (optional)
 
 ## Method 1: Fixed Fractional (Default)
 

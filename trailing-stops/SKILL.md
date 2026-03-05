@@ -13,10 +13,14 @@ description: |
 
 Once a trade is profitable, trailing stops protect your gains while letting winners run.
 
+## Prerequisites
+
+No dependencies required. Provide entry, current price, and ATR manually. Enhanced with Groww MCP (live ATR, candles, MAs) or yfinance.
+
 ## Data Needed
 
-1. **Entry price and current price**: Known
-2. **ATR(14)**: `get_historical_technical_indicators` from Groww
+1. **Entry price and current price**: Known or from `get_quotes_and_depth`
+2. **ATR(14)**: `get_historical_technical_indicators` from Groww, or user-provided
 3. **Recent swing lows/highs**: `fetch_historical_candle_data` (daily)
 4. **Moving averages**: SMA20, EMA50 from indicators
 5. **Initial risk (1R)**: Entry - original stop-loss

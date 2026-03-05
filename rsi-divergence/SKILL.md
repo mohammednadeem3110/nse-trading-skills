@@ -13,9 +13,13 @@ description: |
 
 Divergences signal that momentum is fading — price is moving one way but the engine (RSI) is losing steam. They're early warnings, not guarantees.
 
+## Prerequisites
+
+No dependencies required. Describe price and RSI patterns verbally and Claude identifies divergences. Enhanced with Groww MCP (RSI values, candles) or yfinance (`pip install yfinance`).
+
 ## Data Needed
 
-1. **Daily candles**: `fetch_historical_candle_data` (last 90-120 days)
+1. **Daily candles**: `fetch_historical_candle_data` (last 90-120 days) or user-provided
 2. **RSI(14) values**: `get_historical_technical_indicators` from Groww
 3. For manual calculation via yfinance if needed:
    ```python

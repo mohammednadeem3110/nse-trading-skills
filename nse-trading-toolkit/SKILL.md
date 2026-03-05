@@ -16,15 +16,35 @@ description: |
 
 This is the master workflow that coordinates 8 specialized trading framework skills for Indian NSE/BSE equities.
 
-## Data Sources
+## Prerequisites
 
-| Source | Use For | Tool |
-|--------|---------|------|
-| Groww MCP | Live quotes, depth, portfolio, indicators, candles, orders | `get_quotes_and_depth`, `get_historical_technical_indicators`, `fetch_historical_candle_data`, `get_equity_portfolio_holdings` |
-| yfinance | Historical OHLCV (>6 months), backtesting | Python script with `yfinance` library |
-| TradingView MCP | Crypto screening only | `coin_analysis` |
+All skills work standalone with zero dependencies — they're prompt-based frameworks that Claude applies during analysis. Connecting data sources makes them more powerful:
 
-**First step for any stock:** Use `search_stock_and_others_symbol` to resolve the correct Groww trading symbol.
+| Data Source | Required? | What It Adds | Setup |
+|------------|-----------|-------------|-------|
+| **Groww MCP** | Optional | Live quotes, portfolio, technical indicators, candle data, order placement | Add to `.mcp.json` (see README) |
+| **yfinance** | Optional | Historical OHLCV (>6 months), backtesting | `pip install yfinance` |
+| **TradingView MCP** | Optional | Crypto screening, volume scanners | See [tradingview-mcp](https://github.com/pab-s/tradingview-mcp) |
+
+**Without any data source:** You provide prices manually, Claude applies the frameworks.
+**With Groww MCP:** Claude pulls live data automatically. Use `search_stock_and_others_symbol` first to resolve the trading symbol.
+
+### Groww MCP Tool Reference
+
+| Tool | Use For |
+|------|---------|
+| `search_stock_and_others_symbol` | Find correct trading symbol |
+| `get_quotes_and_depth` | Live price, volume, bid/ask depth |
+| `get_historical_technical_indicators` | RSI, MACD, SMA, EMA, Bollinger, ADX, ATR |
+| `fetch_historical_candle_data` | OHLCV candles (1m to 1w intervals) |
+| `get_equity_portfolio_holdings` | Your current holdings and P&L |
+| `get_ltp` | Quick last traded price |
+
+### yfinance Quick Reference
+```python
+import yfinance as yf
+data = yf.download("RELIANCE.NS", period="2y", interval="1d")  # NSE: .NS, BSE: .BO
+```
 
 ## Master Workflow
 

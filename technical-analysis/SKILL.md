@@ -16,13 +16,19 @@ description: |
 
 Read the chart systematically — don't cherry-pick indicators that confirm a bias.
 
+## Prerequisites
+
+No hard dependencies. Works best with Groww MCP or yfinance for live data, but can analyze any stock if you provide prices manually.
+
 ## Data Collection
+
+When data tools are available, fetch in this order:
 
 1. **Resolve symbol**: `search_stock_and_others_symbol` on Groww
 2. **Live quote**: `get_quotes_and_depth` for current price, volume, day range
 3. **Indicators**: `get_historical_technical_indicators` for SMA, EMA, RSI, MACD, Bollinger, ADX
 4. **Candles**: `fetch_historical_candle_data` with `interval=1d` for at least 200 days
-5. **Long history** (if needed): yfinance with `ticker.history(period="2y")`
+5. **Long history** (if needed): `yf.download("SYMBOL.NS", period="2y")` via yfinance
 
 ## Step 1: Trend Identification
 

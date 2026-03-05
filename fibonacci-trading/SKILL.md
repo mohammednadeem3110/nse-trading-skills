@@ -13,10 +13,14 @@ description: |
 
 Fibonacci levels identify high-probability zones where price tends to react — for entries on pullbacks and targets on extensions.
 
+## Prerequisites
+
+No dependencies required. Just provide a swing high and swing low price — Claude calculates all Fib levels instantly. Enhanced with Groww MCP (auto-identifies swings from candles) or yfinance.
+
 ## Data Needed
 
-1. **Swing high and swing low**: From `fetch_historical_candle_data` — identify the most recent significant swing
-2. **Current price**: `get_quotes_and_depth` from Groww
+1. **Swing high and swing low**: From `fetch_historical_candle_data` or user-provided prices
+2. **Current price**: `get_quotes_and_depth` from Groww, or user-provided
 3. For precise calculation, you can compute in Python:
    ```python
    diff = swing_high - swing_low

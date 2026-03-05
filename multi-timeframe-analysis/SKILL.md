@@ -27,15 +27,20 @@ Higher timeframes set the direction. Lower timeframes refine the entry. Never tr
 2. **Daily identifies the setup** — pullback to support in uptrend, rally to resistance in downtrend
 3. **Hourly/4H times the entry** — wait for the lower TF to confirm reversal in your direction
 
+## Prerequisites
+
+No dependencies required. Framework applies to any timeframe data. Enhanced with Groww MCP (multi-interval candles) or yfinance (`pip install yfinance`) for weekly/monthly history.
+
 ## Fetching Multi-TF Data
 
+When data tools are available:
 ```
 Weekly:  fetch_historical_candle_data with interval=1w
 Daily:   fetch_historical_candle_data with interval=1d
 Hourly:  fetch_historical_candle_data with interval=1h (limited to ~30 days)
 ```
 
-For weekly indicators, use yfinance: `yf.download("SYMBOL.NS", period="2y", interval="1wk")`
+For weekly indicators via yfinance: `yf.download("SYMBOL.NS", period="2y", interval="1wk")`
 
 ## Screen 1: Weekly Analysis
 

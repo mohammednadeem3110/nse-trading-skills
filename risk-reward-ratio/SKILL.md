@@ -13,6 +13,10 @@ description: |
 
 If the math doesn't work, don't take the trade. R:R is the simplest filter that separates good setups from bad ones.
 
+## Prerequisites
+
+No dependencies required. Pure math — provide entry, stop, and target prices. No data tools needed.
+
 ## Calculation
 
 ```

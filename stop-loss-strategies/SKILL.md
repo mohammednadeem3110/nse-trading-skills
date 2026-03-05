@@ -13,12 +13,16 @@ description: |
 
 A stop-loss is not optional. Every position needs one before entry. The purpose is to cap your maximum loss — not to predict where price will go.
 
+## Prerequisites
+
+No dependencies required. Provide entry price and key levels manually. Enhanced with Groww MCP (candles, ATR, MAs) or yfinance (`pip install yfinance`).
+
 ## Data Needed
 
 1. **Entry price**: Known or planned
-2. **Recent candles**: `fetch_historical_candle_data` (daily, last 60 days)
-3. **ATR(14)**: `get_historical_technical_indicators` from Groww
-4. **Key S/R levels**: From technical-analysis skill or swing highs/lows in candle data
+2. **Recent candles**: `fetch_historical_candle_data` (daily, last 60 days) or user-provided levels
+3. **ATR(14)**: `get_historical_technical_indicators` from Groww, or calculate manually
+4. **Key S/R levels**: From technical-analysis skill or swing highs/lows
 5. **Moving averages**: SMA20, SMA50, SMA200
 
 ## Stop Type Selection
