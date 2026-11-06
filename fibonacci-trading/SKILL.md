@@ -17,6 +17,8 @@ Fibonacci levels identify high-probability zones where price tends to react — 
 
 No dependencies required. Just provide a swing high and swing low price — Claude calculates all Fib levels instantly. Enhanced with Groww MCP (auto-identifies swings from candles) or yfinance.
 
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
+
 ## Data Needed
 
 1. **Swing high and swing low**: From `fetch_historical_candle_data` or user-provided prices

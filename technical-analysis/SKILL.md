@@ -20,6 +20,8 @@ Read the chart systematically — don't cherry-pick indicators that confirm a bi
 
 No hard dependencies. Works best with Groww MCP or yfinance for live data, but can analyze any stock if you provide prices manually.
 
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
+
 ## Data Collection
 
 When data tools are available, fetch in this order:

@@ -17,6 +17,8 @@ Once a trade is profitable, trailing stops protect your gains while letting winn
 
 No dependencies required. Provide entry, current price, and ATR manually. Enhanced with Groww MCP (live ATR, candles, MAs) or yfinance.
 
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
+
 ## Data Needed
 
 1. **Entry price and current price**: Known or from `get_quotes_and_depth`

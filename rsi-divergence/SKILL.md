@@ -17,6 +17,8 @@ Divergences signal that momentum is fading — price is moving one way but the e
 
 No dependencies required. Describe price and RSI patterns verbally and Claude identifies divergences. Enhanced with Groww MCP (RSI values, candles) or yfinance (`pip install yfinance`).
 
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
+
 ## Data Needed
 
 1. **Daily candles**: `fetch_historical_candle_data` (last 90-120 days) or user-provided
