@@ -34,33 +34,40 @@
 ### Option 1: Using skills CLI (Recommended)
 
 ```bash
-npx skills add Bhala-Srinivash/nse-trading-skills
+npx skills add mohammednadeem3110/nse-trading-skills
 ```
 
-### Option 2: Manual install
+> This installs whatever is on the default branch at install time. To install a version you have reviewed, use Option 2 and pin a commit.
+
+### Option 2: Manual install (pinned to a reviewed commit)
 
 ```bash
-# Clone the repo
-git clone https://github.com/Bhala-Srinivash/nse-trading-skills.git
+# Clone and pin to a commit you have reviewed
+git clone https://github.com/mohammednadeem3110/nse-trading-skills.git ~/src/nse-trading-skills
+git -C ~/src/nse-trading-skills checkout <reviewed-commit-sha>
 
-# Symlink all skills to your project
-mkdir -p .claude/skills
-for skill in nse-trading-skills/*/; do
+# Symlink all skills into your user-level skills directory
+mkdir -p ~/.claude/skills
+for skill in ~/src/nse-trading-skills/*/; do
   name=$(basename "$skill")
   [ -f "$skill/SKILL.md" ] || continue
-  ln -s "$(cd "$skill" && pwd)" ".claude/skills/$name"
+  ln -s "${skill%/}" "$HOME/.claude/skills/$name"
 done
 ```
 
+> Symlinked skills change whenever the clone changes, so a later `git pull` updates them silently. Review the new commits before pulling.
+
 ### Option 3: Install individual skills only
 
-Only want position sizing and stop-loss? Copy just those:
+Only want position sizing and stop-loss? Copy just those from the pinned clone:
 
 ```bash
-mkdir -p .claude/skills/position-sizing .claude/skills/stop-loss-strategies
-cp nse-trading-skills/position-sizing/SKILL.md .claude/skills/position-sizing/
-cp nse-trading-skills/stop-loss-strategies/SKILL.md .claude/skills/stop-loss-strategies/
+mkdir -p ~/.claude/skills/position-sizing ~/.claude/skills/stop-loss-strategies
+cp ~/src/nse-trading-skills/position-sizing/SKILL.md ~/.claude/skills/position-sizing/
+cp ~/src/nse-trading-skills/stop-loss-strategies/SKILL.md ~/.claude/skills/stop-loss-strategies/
 ```
+
+> **Avoid project-level installs** (`.claude/skills/` or `.mcp.json` inside a repo) unless that repo is your own trading project — they're easy to commit into unrelated (e.g. work) repositories.
 
 ## Usage Examples
 
