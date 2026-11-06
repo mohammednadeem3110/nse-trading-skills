@@ -72,7 +72,9 @@ Shares = Risk amount ÷ Stop distance
 
 This naturally sizes you smaller in volatile stocks and larger in calm ones.
 
-## Method 3: Kelly Criterion (Advanced)
+## Method 3: Kelly Criterion (Advanced / Educational)
+
+> Educational reference — not a recommendation to size this aggressively.
 
 For traders with a track record of at least 30 trades:
 
@@ -103,7 +105,9 @@ These are hard limits — never exceed them regardless of sizing method:
 
 If a position would breach a constraint, reduce size until it fits.
 
-## Leverage Adjustment
+## Leverage Adjustment (Advanced / Educational)
+
+> Leverage amplifies losses; this section explains the math, not a recommendation to use margin.
 
 When using margin/leverage, the math changes because losses are amplified:
 
