@@ -59,7 +59,7 @@ data = yf.download("RELIANCE.NS", period="2y", interval="1d")  # NSE: .NS, BSE: 
 Follow this sequence for a full analysis. Skip steps not relevant to the user's question.
 
 ```
-1. CONTEXT    → What does the user hold? What's their goal?
+1. CONTEXT    → What's the user's goal? Ask before pulling holdings (sensitive data)
 2. DATA       → Pull live quotes + historical candles + indicators
 3. STRUCTURE  → Multi-timeframe analysis (→ use multi-timeframe-analysis skill)
 4. TECHNICALS → Chart reading, indicators (→ use technical-analysis skill)

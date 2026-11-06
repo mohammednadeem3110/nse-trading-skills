@@ -109,6 +109,10 @@ Claude writes Python scripts using yfinance when historical analysis is needed. 
 
 For crypto screening. See [tradingview-mcp](https://github.com/pab-s/tradingview-mcp).
 
+### Privacy
+
+When Groww MCP is connected, your holdings, quantities, average prices, and P&L — plus any account size you type — become part of the conversation sent to the model and are saved in local Claude Code transcripts (`~/.claude/projects/`). Avoid connecting it on shared machines, and only ask about your holdings when you need them analyzed.
+
 ## How It Works
 
 ```

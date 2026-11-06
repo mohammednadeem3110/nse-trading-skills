@@ -24,7 +24,7 @@ No dependencies required. Works with manually provided prices. Enhanced with Gro
 1. **Account size**: Total trading capital (ask user if not known)
 2. **Current price**: `get_quotes_and_depth` from Groww, or user-provided
 3. **ATR(14)**: `get_historical_technical_indicators` from Groww, or calculate from candle data
-4. **Existing positions**: `get_equity_portfolio_holdings` to check concentration (optional)
+4. **Existing positions**: `get_equity_portfolio_holdings` to check concentration (optional — ask the user before fetching; holdings data is sensitive)
 
 ## Method 1: Fixed Fractional (Default)
 
