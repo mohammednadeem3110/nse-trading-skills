@@ -84,20 +84,18 @@ These skills work without any external data — you provide prices, Claude appli
 
 ### Groww MCP (Live Market Data)
 
-Add to your project's `.mcp.json`:
+Add it at user scope (stored in your user config, not in any project):
 
-```json
-{
-  "mcpServers": {
-    "growwmcp": {
-      "command": "npx",
-      "args": ["mcp-remote@0.1.18", "https://mcp.groww.in/mcp", "52155"]
-    }
-  }
-}
+```bash
+claude mcp add --scope user growwmcp -- npx mcp-remote@0.1.18 https://mcp.groww.in/mcp 52155
 ```
 
-Provides: live quotes, bid/ask depth, technical indicators (RSI, MACD, Bollinger, ADX, ATR), historical candles, portfolio holdings, and order placement.
+The skills use it read-only: live quotes, bid/ask depth, technical indicators (RSI, MACD, Bollinger, ADX, ATR), historical candles, and portfolio holdings.
+
+> **⚠️ Security notes**
+> - **Order tools:** this MCP can also place real orders. The skills never call order tools, but enforce it yourself: after connecting, run `/mcp` to list the Groww tools and add every order-related tool to `permissions.deny` in `~/.claude/settings.json`, e.g. `{ "permissions": { "deny": ["mcp__growwmcp__<order_tool_name>"] } }`.
+> - **Endpoint:** verify that `mcp.groww.in` is Groww's official MCP endpoint (from groww.in or Groww's own docs) before authenticating.
+> - **Version pin:** keep `mcp-remote` pinned to an exact version (0.1.16+ fixes CVE-2025-6514). Review the changelog before bumping it.
 
 ### yfinance (Historical Data)
 

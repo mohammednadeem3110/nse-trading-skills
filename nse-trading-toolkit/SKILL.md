@@ -22,7 +22,7 @@ All skills work standalone with zero dependencies — they're prompt-based frame
 
 | Data Source | Required? | What It Adds | Setup |
 |------------|-----------|-------------|-------|
-| **Groww MCP** | Optional | Live quotes, portfolio, technical indicators, candle data (read-only use) | Add to `.mcp.json` (see README) |
+| **Groww MCP** | Optional | Live quotes, portfolio, technical indicators, candle data (read-only use) | `claude mcp add --scope user` (see README) |
 | **yfinance** | Optional | Historical OHLCV (>6 months), backtesting | `pip install yfinance` |
 | **TradingView MCP** | Optional | Crypto screening, volume scanners | See [tradingview-mcp](https://github.com/pab-s/tradingview-mcp) |
 
