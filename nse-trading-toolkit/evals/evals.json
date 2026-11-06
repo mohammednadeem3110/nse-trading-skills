@@ -3,7 +3,7 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Analyze BBTC. I hold 1128 shares at avg Rs.1898. What should I do?",
+      "prompt": "Analyze ITC. I hold 200 shares at avg Rs.400 (example values). What should I do?",
       "expected_output": "Full analysis with current technicals, scenarios, and a concrete action plan with position sizing and stop-loss levels",
       "files": []
     },
