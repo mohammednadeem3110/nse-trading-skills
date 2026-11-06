@@ -106,8 +106,12 @@ The skills use it read-only: live quotes, bid/ask depth, technical indicators (R
 
 ### yfinance (Historical Data)
 
+Install it pinned, inside a virtualenv:
+
 ```bash
-pip install yfinance
+python3 -m venv ~/.venvs/nse-trading
+source ~/.venvs/nse-trading/bin/activate
+pip install yfinance==1.7.0
 ```
 
 Claude writes Python scripts using yfinance when historical analysis is needed. NSE stocks use `.NS` suffix (e.g., `RELIANCE.NS`), BSE use `.BO`.

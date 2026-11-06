@@ -15,7 +15,7 @@ A stop-loss is not optional. Every position needs one before entry. The purpose 
 
 ## Prerequisites
 
-No dependencies required. Provide entry price and key levels manually. Enhanced with Groww MCP (candles, ATR, MAs) or yfinance (`pip install yfinance`).
+No dependencies required. Provide entry price and key levels manually. Enhanced with Groww MCP (candles, ATR, MAs) or yfinance (`pip install yfinance==1.7.0` in a virtualenv — see README).
 
 **Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
 

@@ -15,7 +15,7 @@ Position sizing is how you survive. The goal: risk a small, consistent percentag
 
 ## Prerequisites
 
-No dependencies required. Works with manually provided prices. Enhanced with Groww MCP (live price, ATR, portfolio) or yfinance (`pip install yfinance`).
+No dependencies required. Works with manually provided prices. Enhanced with Groww MCP (live price, ATR, portfolio) or yfinance (`pip install yfinance==1.7.0` in a virtualenv — see README).
 
 **Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
 
