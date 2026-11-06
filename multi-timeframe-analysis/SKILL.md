@@ -29,7 +29,9 @@ Higher timeframes set the direction. Lower timeframes refine the entry. Never tr
 
 ## Prerequisites
 
-No dependencies required. Framework applies to any timeframe data. Enhanced with Groww MCP (multi-interval candles) or yfinance (`pip install yfinance`) for weekly/monthly history.
+No dependencies required. Framework applies to any timeframe data. Enhanced with Groww MCP (multi-interval candles) or yfinance (`pip install yfinance==1.7.0` in a virtualenv — see README) for weekly/monthly history.
+
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
 
 ## Fetching Multi-TF Data
 

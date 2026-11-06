@@ -15,7 +15,9 @@ A stop-loss is not optional. Every position needs one before entry. The purpose 
 
 ## Prerequisites
 
-No dependencies required. Provide entry price and key levels manually. Enhanced with Groww MCP (candles, ATR, MAs) or yfinance (`pip install yfinance`).
+No dependencies required. Provide entry price and key levels manually. Enhanced with Groww MCP (candles, ATR, MAs) or yfinance (`pip install yfinance==1.7.0` in a virtualenv — see README).
+
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
 
 ## Data Needed
 
@@ -82,7 +84,7 @@ These are non-negotiable:
 2. **Never move stop further away** — only tighten or leave unchanged
 3. **If stop hits**: exit immediately at next open. No "let me wait for close"
 4. **Pre-set the stop**: Decide before entering. Don't adjust based on emotions after entry
-5. **No mental stops**: Use actual stop-loss orders on Groww if possible, or set hard price alerts
+5. **No mental stops**: Place a stop-loss order manually in the Groww app yourself, or set hard price alerts
 
 ## Stop Validation
 

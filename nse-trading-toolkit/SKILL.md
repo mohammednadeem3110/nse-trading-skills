@@ -6,7 +6,7 @@ description: |
   trailing stops, risk-reward, multi-timeframe, RSI divergence, and Fibonacci trading.
 
   Use this skill whenever the user asks to: analyze a stock, check a position, decide buy/sell/hold,
-  plan entries/exits, or do any comprehensive trading analysis for Indian equities. Triggers on:
+  plan entries/exits (analysis and plans only — never places orders), or do any comprehensive trading analysis for Indian equities. Triggers on:
   "analyze [stock]", "should I buy/sell [stock]", "check [stock]", "what's the setup on [stock]",
   or any broad market analysis request involving NSE/BSE stocks. This is the go-to skill for
   full stock analysis — it pulls together all the individual framework skills into one workflow.
@@ -22,8 +22,8 @@ All skills work standalone with zero dependencies — they're prompt-based frame
 
 | Data Source | Required? | What It Adds | Setup |
 |------------|-----------|-------------|-------|
-| **Groww MCP** | Optional | Live quotes, portfolio, technical indicators, candle data, order placement | Add to `.mcp.json` (see README) |
-| **yfinance** | Optional | Historical OHLCV (>6 months), backtesting | `pip install yfinance` |
+| **Groww MCP** | Optional | Live quotes, portfolio, technical indicators, candle data (read-only use) | `claude mcp add --scope user` (see README) |
+| **yfinance** | Optional | Historical OHLCV (>6 months), backtesting | `pip install yfinance==1.7.0` in a virtualenv — see README |
 | **TradingView MCP** | Optional | Crypto screening, volume scanners | See [tradingview-mcp](https://github.com/pab-s/tradingview-mcp) |
 
 **Without any data source:** You provide prices manually, Claude applies the frameworks.
@@ -40,6 +40,14 @@ All skills work standalone with zero dependencies — they're prompt-based frame
 | `get_equity_portfolio_holdings` | Your current holdings and P&L |
 | `get_ltp` | Quick last traded price |
 
+### Safety: Read-Only Broker Access
+
+These skills produce analysis and trade plans only. The Groww MCP can also place orders — these skills must never use that.
+
+- Only call the read-only tools listed above (symbol search, quotes, indicators, candles, holdings, LTP).
+- **Never** call any tool that places, modifies, or cancels orders (including stop-loss / GTT orders), even if the user asks.
+- End every analysis with a plan the user executes manually in the Groww app.
+
 ### yfinance Quick Reference
 ```python
 import yfinance as yf
@@ -51,7 +59,7 @@ data = yf.download("RELIANCE.NS", period="2y", interval="1d")  # NSE: .NS, BSE: 
 Follow this sequence for a full analysis. Skip steps not relevant to the user's question.
 
 ```
-1. CONTEXT    → What does the user hold? What's their goal?
+1. CONTEXT    → What's the user's goal? Ask before pulling holdings (sensitive data)
 2. DATA       → Pull live quotes + historical candles + indicators
 3. STRUCTURE  → Multi-timeframe analysis (→ use multi-timeframe-analysis skill)
 4. TECHNICALS → Chart reading, indicators (→ use technical-analysis skill)
@@ -63,7 +71,7 @@ Follow this sequence for a full analysis. Skip steps not relevant to the user's 
                  Trailing plan (→ use trailing-stops skill)
 8. TARGETS    → R:R ratio check (→ use risk-reward-ratio skill)
                  Fibonacci extensions (→ use fibonacci-trading skill)
-9. PLAN       → Concrete action plan with prices and triggers
+9. PLAN       → Concrete action plan with prices and triggers (user executes manually)
 ```
 
 ## When to Use Which Skill

@@ -34,33 +34,40 @@
 ### Option 1: Using skills CLI (Recommended)
 
 ```bash
-npx skills add Bhala-Srinivash/nse-trading-skills
+npx skills add mohammednadeem3110/nse-trading-skills
 ```
 
-### Option 2: Manual install
+> This installs whatever is on the default branch at install time. To install a version you have reviewed, use Option 2 and pin a commit.
+
+### Option 2: Manual install (pinned to a reviewed commit)
 
 ```bash
-# Clone the repo
-git clone https://github.com/Bhala-Srinivash/nse-trading-skills.git
+# Clone and pin to a commit you have reviewed
+git clone https://github.com/mohammednadeem3110/nse-trading-skills.git ~/src/nse-trading-skills
+git -C ~/src/nse-trading-skills checkout <reviewed-commit-sha>
 
-# Symlink all skills to your project
-mkdir -p .claude/skills
-for skill in nse-trading-skills/*/; do
+# Symlink all skills into your user-level skills directory
+mkdir -p ~/.claude/skills
+for skill in ~/src/nse-trading-skills/*/; do
   name=$(basename "$skill")
   [ -f "$skill/SKILL.md" ] || continue
-  ln -s "$(cd "$skill" && pwd)" ".claude/skills/$name"
+  ln -s "${skill%/}" "$HOME/.claude/skills/$name"
 done
 ```
 
+> Symlinked skills change whenever the clone changes, so a later `git pull` updates them silently. Review the new commits before pulling.
+
 ### Option 3: Install individual skills only
 
-Only want position sizing and stop-loss? Copy just those:
+Only want position sizing and stop-loss? Copy just those from the pinned clone:
 
 ```bash
-mkdir -p .claude/skills/position-sizing .claude/skills/stop-loss-strategies
-cp nse-trading-skills/position-sizing/SKILL.md .claude/skills/position-sizing/
-cp nse-trading-skills/stop-loss-strategies/SKILL.md .claude/skills/stop-loss-strategies/
+mkdir -p ~/.claude/skills/position-sizing ~/.claude/skills/stop-loss-strategies
+cp ~/src/nse-trading-skills/position-sizing/SKILL.md ~/.claude/skills/position-sizing/
+cp ~/src/nse-trading-skills/stop-loss-strategies/SKILL.md ~/.claude/skills/stop-loss-strategies/
 ```
+
+> **Avoid project-level installs** (`.claude/skills/` or `.mcp.json` inside a repo) unless that repo is your own trading project — they're easy to commit into unrelated (e.g. work) repositories.
 
 ## Usage Examples
 
@@ -84,25 +91,27 @@ These skills work without any external data — you provide prices, Claude appli
 
 ### Groww MCP (Live Market Data)
 
-Add to your project's `.mcp.json`:
+Add it at user scope (stored in your user config, not in any project):
 
-```json
-{
-  "mcpServers": {
-    "growwmcp": {
-      "command": "npx",
-      "args": ["mcp-remote@0.1.18", "https://mcp.groww.in/mcp", "52155"]
-    }
-  }
-}
+```bash
+claude mcp add --scope user growwmcp -- npx mcp-remote@0.1.18 https://mcp.groww.in/mcp 52155
 ```
 
-Provides: live quotes, bid/ask depth, technical indicators (RSI, MACD, Bollinger, ADX, ATR), historical candles, portfolio holdings, and order placement.
+The skills use it read-only: live quotes, bid/ask depth, technical indicators (RSI, MACD, Bollinger, ADX, ATR), historical candles, and portfolio holdings.
+
+> **⚠️ Security notes**
+> - **Order tools:** this MCP can also place real orders. The skills never call order tools, but enforce it yourself: after connecting, run `/mcp` to list the Groww tools and add every order-related tool to `permissions.deny` in `~/.claude/settings.json`, e.g. `{ "permissions": { "deny": ["mcp__growwmcp__<order_tool_name>"] } }`.
+> - **Endpoint:** verify that `mcp.groww.in` is Groww's official MCP endpoint (from groww.in or Groww's own docs) before authenticating.
+> - **Version pin:** keep `mcp-remote` pinned to an exact version (0.1.16+ fixes CVE-2025-6514). Review the changelog before bumping it.
 
 ### yfinance (Historical Data)
 
+Install it pinned, inside a virtualenv:
+
 ```bash
-pip install yfinance
+python3 -m venv ~/.venvs/nse-trading
+source ~/.venvs/nse-trading/bin/activate
+pip install yfinance==1.7.0
 ```
 
 Claude writes Python scripts using yfinance when historical analysis is needed. NSE stocks use `.NS` suffix (e.g., `RELIANCE.NS`), BSE use `.BO`.
@@ -110,6 +119,10 @@ Claude writes Python scripts using yfinance when historical analysis is needed. 
 ### TradingView MCP (Crypto Only)
 
 For crypto screening. See [tradingview-mcp](https://github.com/pab-s/tradingview-mcp).
+
+### Privacy
+
+When Groww MCP is connected, your holdings, quantities, average prices, and P&L — plus any account size you type — become part of the conversation sent to the model and are saved in local Claude Code transcripts (`~/.claude/projects/`). Avoid connecting it on shared machines, and only ask about your holdings when you need them analyzed.
 
 ## How It Works
 

@@ -15,14 +15,16 @@ Position sizing is how you survive. The goal: risk a small, consistent percentag
 
 ## Prerequisites
 
-No dependencies required. Works with manually provided prices. Enhanced with Groww MCP (live price, ATR, portfolio) or yfinance (`pip install yfinance`).
+No dependencies required. Works with manually provided prices. Enhanced with Groww MCP (live price, ATR, portfolio) or yfinance (`pip install yfinance==1.7.0` in a virtualenv — see README).
+
+**Read-only:** Never call Groww order placement, modification, or cancellation tools. Output a plan; the user places any order manually in the Groww app.
 
 ## Data Needed
 
 1. **Account size**: Total trading capital (ask user if not known)
 2. **Current price**: `get_quotes_and_depth` from Groww, or user-provided
 3. **ATR(14)**: `get_historical_technical_indicators` from Groww, or calculate from candle data
-4. **Existing positions**: `get_equity_portfolio_holdings` to check concentration (optional)
+4. **Existing positions**: `get_equity_portfolio_holdings` to check concentration (optional — ask the user before fetching; holdings data is sensitive)
 
 ## Method 1: Fixed Fractional (Default)
 
@@ -70,7 +72,9 @@ Shares = Risk amount ÷ Stop distance
 
 This naturally sizes you smaller in volatile stocks and larger in calm ones.
 
-## Method 3: Kelly Criterion (Advanced)
+## Method 3: Kelly Criterion (Advanced / Educational)
+
+> Educational reference — not a recommendation to size this aggressively.
 
 For traders with a track record of at least 30 trades:
 
@@ -101,7 +105,9 @@ These are hard limits — never exceed them regardless of sizing method:
 
 If a position would breach a constraint, reduce size until it fits.
 
-## Leverage Adjustment
+## Leverage Adjustment (Advanced / Educational)
+
+> Leverage amplifies losses; this section explains the math, not a recommendation to use margin.
 
 When using margin/leverage, the math changes because losses are amplified:
 
